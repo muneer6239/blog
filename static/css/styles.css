@@ -1,0 +1,42 @@
+body {
+    background-color: aliceblue;
+}
+
+.card-content {
+    background-color: white;
+}
+
+.jumbotron {
+    background-color: silver;
+}
+
+.footer-icon {
+    color: grey;
+}
+
+.footer-icon:hover {
+    color: silver;
+}
+
+.copyright {
+    color: grey;
+}
+
+.copyright:hover {
+    color: silver;
+}
+
+.about-post {
+    background-color: silver;
+}
+
+.about-text {
+    font-size: 1.3rem;
+    text-align: justify;
+    width: 90%;
+}
+
+
+#footer {
+    text-align: center;
+}

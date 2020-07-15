@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>Search</title>
+{% endblock title %}
+
+{% block content %}
+
+<div class="container">
+        {% comment %} {% if error %}
+            <div class="alert alert-info alert-dismissible" role="alert">
+                {% for message in messages%}
+                    {{error}}
+                {% endfor %}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %} {% endcomment %}
+
+        <div class="row my-4"> 
+        {% for search in searchQuery %}               
+                <div class="col-md-6">
+                    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative card-content">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <strong class="d-inline-block mb-2 text-dark">0{{forloop.counter}}</strong>
+                            <h3 class="mb-0">{{search.title}}</h3>
+                            <div class="mb-1 text-muted">{{search.pub_date}} by <em class="font-weight-bold">{{search.author}}</em></div>
+                            <p class="card-text mb-auto">{{search.chead0}}</p>
+                            <span class="post-action mt-3">
+                                <a href="{% url 'blogPost' search.post_id %}" class="mr-5">Continue reading</a>
+                                {% if request.user == search.author %}
+                                    <a href="{% url 'editPost' search.post_id %}" class="ml-5">Edit Post</a>
+                                {% endif %}
+                            </span>
+                        </div>
+                        <div class="col-auto d-none d-lg-block">
+                            <img src="/media/{{search.thumbnail}}" class="bd-placeholder-img" width="150" height="205" alt="thumbnail">
+                        </div>        
+                    </div>                  
+                {% if forloop.counter|divisibleby:2 %}    
+                    </div> <div class="row my-4">
+                {% endif %}                 
+                </div>
+               
+        {% endfor %}  
+        </div>  
+    </div>
+
+{% endblock content%}

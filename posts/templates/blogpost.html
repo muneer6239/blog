@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Blogpedia-Read Post</title>
+{% endblock %}
+
+
+{% block content %}
+    
+    <div class="container">
+
+        <div class="row mt-5">
+            <div class="col-md-8 blog-main">
+            <h1 class="pb-4 mb-4 font-italic">
+                {{post.title}}
+            </h1>
+
+            <div class="blog-post">
+                <h2 class="blog-post-title">{{post.head0}}</h2>
+                <p class="blog-post-meta">{{post.pub_date}} by <em class="font-weight-bold">{{post.author}}</em></p>
+
+                <p>{{post.chead0}}</p>
+                <hr>
+               
+                <h2>{{post.head1}}</h2>
+                <p>{{post.chead1}}</p>
+                <hr>
+                <span>
+                    <p class="h6">{{post.read}} times readed</p>
+                    <div class="fb-like mb-4" data-href="http://127.0.0.1:8000/blog/posts/{{post.post_id}}" data-width="" data-layout="standard" data-action="like" data-size="large" data-share="true"></div>
+                </span>
+                <div class="fb-comments" data-href="http://127.0.0.1:8000/blog/posts/{{post.post_id}}" data-numposts="5" data-width=""></div>
+            </div><!-- /.blog-post -->
+
+            </div><!-- /.blog-main -->
+            
+            <aside class="col-md-4 blog-sidebar">
+            <div class="p-4 mb-3 rounded about-post">
+                <h4 class="font-italic">About</h4>
+                <p class="mb-0">{{post.about}}</p>
+            </div>
+
+            </aside><!-- /.blog-sidebar -->
+
+        </div><!-- /.row -->
+
+
+
+
+    </div>
+{% endblock %}
+

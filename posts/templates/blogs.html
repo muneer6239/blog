@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title%}
+    <title>Blogpedia-Posts</title>
+{% endblock%}
+
+{% block content %}
+
+    <div class="container">
+        <div class="mt-4">
+            {% if messages %}
+                <div class="alert alert-info alert-dismissible" role="alert">
+                    {% for message in messages%}
+                        {{message}}
+                    {% endfor %}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="row my-5"> 
+        {% for post in posts%}               
+                <div class="col-md-6">
+                    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative card-content">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <strong class="d-inline-block mb-2 text-dark">0{{forloop.counter}}</strong>
+                            <h3 class="mb-0">{{post.title}}</h3>
+                            <div class="mb-1 text-muted">{{post.pub_date}} by <em class="font-weight-bold">{{post.author}}</em></div>
+                            <p class="card-text mb-auto">{{post.chead0}}</p>
+                            <span class="post-action mt-3">
+                                <a href="{% url 'blogPost' post.post_id %}" class="mr-5">Continue reading</a>
+                                {% if request.user == post.author %}
+                                    <a href="{% url 'editPost' post.post_id %}" class="ml-5">Edit Post</a>
+                                {% endif %}
+                            </span>
+                        </div>
+                        <div class="col-auto d-none d-lg-block">
+                            <img src="/media/{{post.thumbnail}}" class="bd-placeholder-img" width="150" height="205" alt="thumbnail">
+                        </div>        
+                    </div>                  
+                {% if forloop.counter|divisibleby:2 %}    
+                    </div> <div class="row my-4">
+                {% endif %}                 
+                </div>
+               
+        {% endfor %}  
+        </div>  
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end mr-5">
+                
+                <li class="page-item">
+                    <a class="page-link" href="?pg=1">>></a>
+                </li>
+                
+                {% if posts.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?pg={{posts.previous_page_number}}">{{posts.previous_page_number}}</a></li>
+                {% endif %}
+                <li class="page-item"><a class="page-link" href="?pg={{posts.number}}">{{posts.number}}</a></li>
+                {% if posts.has_next %}
+                    <li class="page-item"><a class="page-link" href="?pg={{posts.next_page_number}}">{{posts.next_page_number}}</a></li>
+                {% endif %}
+                
+                <li class="page-item">
+                    <a class="page-link" href="?pg={{posts.paginator.num_pages}}" ><<</a>
+                </li>
+                
+            </ul>
+        </nav>
+
+    </div>
+
+
+{% endblock %}
